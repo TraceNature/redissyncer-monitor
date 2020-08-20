@@ -64,8 +64,136 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
-        </plugins>
-    </build>
 
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+
+                </configuration>
+
+            </plugin>
+
+            <!--            //分包打包-->
+
+            <!--            mvn clean dependency:copy-dependencies  -DoutputDirectory=target/lib package-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- 添加依赖jar路径 -->
+                            <addClasspath>true</addClasspath>
+                            <!-- 入口程序 -->
+                            <mainClass>syncer.SyncerplusWebappApplication</mainClass>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+
+
+
+            <!-- 指定到相对路径下-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>${groupId}</groupId>
+                            <artifactId>${artifactId}</artifactId>
+                            <version>${version}</version>
+                            <type>${packaging}</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${basedir}</outputDirectory>
+                            <destFileName>${artifactId}-${version}.jar</destFileName>
+                        </artifactItem>
+                    </artifactItems>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.10</version>
+                <configuration>
+                    <repository>redissyncer-monitor-admin</repository>
+                    <contextDirectory>../</contextDirectory>
+                    <tag>${version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>${artifactId}-${version}.jar</JAR_FILE>
+                        <!--                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>-->
+                    </buildArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default</id>
+
+                        <goals>
+                            <goal>build</goal>
+                            <!--                            <goal>push</goal>-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--Docker maven plugin-->
+            <!--            <plugin>-->
+            <!--                <groupId>com.spotify</groupId>-->
+            <!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
+            <!--                <version>1.4.10</version>-->
+            <!--                <configuration>-->
+            <!--                    <repository>${project.artifactId}</repository>-->
+            <!--                    <contextDirectory>./</contextDirectory>-->
+            <!--                    <tag>${project.version}</tag>-->
+            <!--                    <buildArgs>-->
+            <!--                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>-->
+            <!--                    </buildArgs>-->
+            <!--                </configuration>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>default</id>-->
+            <!--                        <goals>-->
+            <!--                            <goal>build</goal>-->
+            <!--&lt;!&ndash;                            <goal>push</goal>&ndash;&gt;-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <artifactId>maven-compiler-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <source>1.8</source>-->
+            <!--                    <target>1.8</target>-->
+            <!--                    <encoding>UTF-8</encoding>-->
+            <!--                    <compilerArguments>-->
+            <!--                        <verbose />-->
+            <!--                        &lt;!&ndash; 将jdk的依赖jar打入项目中，这样项目中使用的jdk的依赖就尅正常使用 &ndash;&gt;-->
+            <!--                        <bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar;${java.home}/lib/jsse.jar</bootclasspath>-->
+            <!--                    </compilerArguments>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+        </plugins>
+
+
+    </build>
 </project>
