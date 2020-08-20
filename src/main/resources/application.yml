@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: redissyncer-monitor-server
+  security:
+     user:
+       name: "admin"
+       password: "admin"
+server:
+  port: 8090
