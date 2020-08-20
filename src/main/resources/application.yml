@@ -5,5 +5,10 @@ spring:
      user:
        name: "admin"
        password: "admin"
+  boot:
+    admin:
+      ui:
+        brand: <img src="assets/img/icon-spring-boot-admin.svg"><span>RedisSyncer Monitor Admin</span>
+        title: RedisSyncer Monitor Admin
 server:
   port: 8090
