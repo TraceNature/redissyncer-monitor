@@ -138,7 +138,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.10</version>
                 <configuration>
-                    <repository>redissyncer-monitor-admin</repository>
+                    <repository>redissyncer-monitor</repository>
                     <contextDirectory>${project.basedir}</contextDirectory>
                     <tag>${version}</tag>
                     <buildArgs>
@@ -162,8 +162,8 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.10</version>
                 <configuration>
-                    <repository>redissyncer</repository>
-                    <contextDirectory>../</contextDirectory>
+                    <repository>redissyncer-monitor</repository>
+                    <contextDirectory>${project.basedir}</contextDirectory>
                     <tag>${admin.version}</tag>
                     <buildArgs>
                         <JAR_FILE>${artifactId}-${admin.version}.jar</JAR_FILE>
