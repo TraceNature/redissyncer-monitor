@@ -139,7 +139,7 @@
                 <version>1.4.10</version>
                 <configuration>
                     <repository>redissyncer-monitor-admin</repository>
-                    <contextDirectory>../</contextDirectory>
+                    <contextDirectory>./</contextDirectory>
                     <tag>${version}</tag>
                     <buildArgs>
                         <JAR_FILE>${artifactId}-${version}.jar</JAR_FILE>
