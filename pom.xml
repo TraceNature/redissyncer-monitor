@@ -9,13 +9,14 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>syncer.monitor</groupId>
-    <artifactId>monitor_admin</artifactId>
+    <artifactId>redissyncer-monitor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>monitor_admin</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <admin.version>3.0.1</admin.version>
     </properties>
 
     <dependencies>
@@ -156,44 +157,31 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--Docker maven plugin-->
-            <!--            <plugin>-->
-            <!--                <groupId>com.spotify</groupId>-->
-            <!--                <artifactId>dockerfile-maven-plugin</artifactId>-->
-            <!--                <version>1.4.10</version>-->
-            <!--                <configuration>-->
-            <!--                    <repository>${project.artifactId}</repository>-->
-            <!--                    <contextDirectory>./</contextDirectory>-->
-            <!--                    <tag>${project.version}</tag>-->
-            <!--                    <buildArgs>-->
-            <!--                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>-->
-            <!--                    </buildArgs>-->
-            <!--                </configuration>-->
-            <!--                <executions>-->
-            <!--                    <execution>-->
-            <!--                        <id>default</id>-->
-            <!--                        <goals>-->
-            <!--                            <goal>build</goal>-->
-            <!--&lt;!&ndash;                            <goal>push</goal>&ndash;&gt;-->
-            <!--                        </goals>-->
-            <!--                    </execution>-->
-            <!--                </executions>-->
-            <!--            </plugin>-->
-            <!--            <plugin>-->
-            <!--                <artifactId>maven-compiler-plugin</artifactId>-->
-            <!--                <configuration>-->
-            <!--                    <source>1.8</source>-->
-            <!--                    <target>1.8</target>-->
-            <!--                    <encoding>UTF-8</encoding>-->
-            <!--                    <compilerArguments>-->
-            <!--                        <verbose />-->
-            <!--                        &lt;!&ndash; 将jdk的依赖jar打入项目中，这样项目中使用的jdk的依赖就尅正常使用 &ndash;&gt;-->
-            <!--                        <bootclasspath>${java.home}/lib/rt.jar;${java.home}/lib/jce.jar;${java.home}/lib/jsse.jar</bootclasspath>-->
-            <!--                    </compilerArguments>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.10</version>
+                <configuration>
+                    <repository>redissyncer</repository>
+                    <contextDirectory>../</contextDirectory>
+                    <tag>${admin.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>${artifactId}-${admin.version}.jar</JAR_FILE>
+                        <!--                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>-->
+                    </buildArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default</id>
+
+                        <goals>
+                            <goal>build</goal>
+                            <!--                            <goal>push</goal>-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
-
-
     </build>
 </project>
