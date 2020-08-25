@@ -139,7 +139,7 @@
                 <version>1.4.10</version>
                 <configuration>
                     <repository>redissyncer-monitor</repository>
-                    <contextDirectory>${project.basedir}</contextDirectory>
+                    <contextDirectory>${basedir}</contextDirectory>
                     <tag>${version}</tag>
                     <buildArgs>
                         <JAR_FILE>${artifactId}-${version}.jar</JAR_FILE>
@@ -157,31 +157,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.10</version>
-                <configuration>
-                    <repository>redissyncer-monitor</repository>
-                    <contextDirectory>${project.basedir}</contextDirectory>
-                    <tag>${admin.version}</tag>
-                    <buildArgs>
-                        <JAR_FILE>${artifactId}-${admin.version}.jar</JAR_FILE>
-                        <!--                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>-->
-                    </buildArgs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>default</id>
-
-                        <goals>
-                            <goal>build</goal>
-                            <!--                            <goal>push</goal>-->
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
         </plugins>
     </build>
 </project>
