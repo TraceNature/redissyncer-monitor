@@ -1,4 +1,4 @@
-package syncer.monitor.monitor_admin;
+package syncer.monitor.admin;
 
 import de.codecentric.boot.admin.server.config.AdminServerProperties;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;

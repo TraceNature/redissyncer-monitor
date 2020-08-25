@@ -95,7 +95,7 @@
                             <!-- 添加依赖jar路径 -->
                             <addClasspath>true</addClasspath>
                             <!-- 入口程序 -->
-                            <mainClass>syncer.SyncerplusWebappApplication</mainClass>
+                            <mainClass>syncer.monitor.admin.MonitorAdminApplication</mainClass>
                             <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
                     </archive>

@@ -1,4 +1,4 @@
-package syncer.monitor.monitor_admin;
+package syncer.monitor.admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
